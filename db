@@ -1,0 +1,71 @@
+CREATE DATABASE GALERI
+
+CREATE TABLE MUSTERI (
+	mNo int PRIMARY KEY,
+	mAdi varchar(50),
+	mSoyadi varchar(50),
+	mTelefon int, 
+	mAdres varchar(50)
+)
+
+
+CREATE TABLE ARAC (
+	aracNo int PRIMARY KEY,
+	model int,
+	marka varchar(50),
+	plaka varchar(50), 
+	fiyat int
+)
+
+
+CREATE TABLE SATIS (
+	satNo int PRIMARY KEY,
+	satTarih int,
+	satFiyat int,
+	mNo int,
+	aNo int
+)
+
+CREATE TABLE ALIM (
+	alNo int PRIMARY KEY,
+	alTarih int,
+	alFiyat int,
+	mNo int,
+	aNo int
+)
+
+select * from MUSTERI
+select * from ARAC
+select * from SATIS
+select * from ALIM
+
+INSERT INTO MUSTERI VALUES (1,'Turgut', 'Ozseven', 123, 'Tokat')
+INSERT INTO MUSTERI VALUES (2, 'Mustafa', 'Çağlayan', 321, 'Konya')
+INSERT INTO MUSTERI VALUES (3, 'Turgut', 'Ozseven', 456, 'Tokat')
+INSERT INTO MUSTERI VALUES (4, 'Murat', 'Beyaz', 654, 'Tokat')
+INSERT INTO MUSTERI VALUES (5, 'Elif', 'Kurt', 789, 'İstanbul')
+
+SELECT * FROM MUSTERI WHERE mAdres = 'Tokat' and (mAdi like 'm%' or mTelefon like '%5%')
+
+INSERT INTO ARAC VALUES (1, 2004, 'Fiat', 3838, 100000)
+INSERT INTO ARAC VALUES (2, 2020, 'Renault', 3839, 110000)
+INSERT INTO ARAC VALUES (3, 2010, 'Ford', 3840, 120000)
+
+
+INSERT INTO SATIS VALUES (1, '2024', 170000, 1, 1)
+INSERT INTO SATIS VALUES (2, '2023', 115000, 2, 2)
+INSERT INTO SATIS VALUES (3, '2024', 270000, 3, 3)
+
+INSERT INTO ALIM VALUES (1, '2024', 170000, 1, 1)
+INSERT INTO ALIM VALUES (2, '2023', 115000, 2, 2)
+INSERT INTO ALIM VALUES (3, '2024', 270000, 3, 3)
+
+
+--1
+SELECT MUSTERI.mAdi, MUSTERI.mSoyadi FROM SATIS JOIN MUSTERI ON SATIS.mNo = MUSTERI.mNo
+
+
+--2
+SELECT MUSTERI.mAdi, MUSTERI.mSoyadi, ARAC.marka FROM ALIM 
+JOIN MUSTERI ON MUSTERI.mNo = ALIM.mNo JOIN ARAC ON MUSTERI.mNo = ARAC.aracNo
+
